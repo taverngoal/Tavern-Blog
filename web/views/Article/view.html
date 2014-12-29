@@ -1,0 +1,14 @@
+<div id="articleview" ng-controller="articleWrap">
+    <header>
+        <i class="fa fa-qrcode fa-fw qrcode"></i>
+        <span class="title">{{article.title}}</span>
+        <span class="extension"><i class="fa fa-clock-o fa-fw"></i>{{DateParse(article.created_at,"yyyy-MM-dd hh:mm:ss")}}</span>
+    </header>
+    <article ng-bind-html="article.content">
+    </article>
+    <footer>
+        <i class="fa fa-user fa-fw"></i> {{article.user.name||article.user.username||"匿名"}}
+        <i class="fa fa-eye fa-fw"></i>{{article.views}}
+        <i class="fa fa-comment fa-fw"></i>0
+    </footer>
+</div>
