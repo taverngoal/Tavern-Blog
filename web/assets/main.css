@@ -85,8 +85,8 @@ li > a, a.inherit, .inherit a
         #articleview section article pre{ overflow-x: auto}
     #articleview section footer { text-align: right }
 
-.actionbar { padding: 0 20px; margin:0; line-height: 28px; }
-    .actionbar .md-button{ padding: 0 5px; color:#aaa;}
+.actionbar { padding: 0 20px; margin:0; }
+    .actionbar .md-button{ padding: 0 5px; color:#aaa;  line-height: 28px;}
     .actionbar .md-button.active{color:darkorange}
 
 .ngview{ margin:40px 1.5% 30px 1.5%; padding: 5px;/* background: #eee; box-shadow: 0 0 10px #000 inset;*/ border-radius: 5px; overflow: auto; height: inherit; }

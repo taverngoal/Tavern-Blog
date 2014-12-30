@@ -1,0 +1,1 @@
+User.reg 'tavern', 'Tavern1001', 1
