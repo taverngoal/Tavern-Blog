@@ -11,6 +11,10 @@ define(['angular', 'angular-material', 'angular-animate', 'dist/pdfController.mi
                     controller: 'indexController',
                     templateUrl: 'views/index.html'
                 })
+                .when("/login", {
+                    controller: 'loginController',
+                    templateUrl: 'views/login.html'
+                })
                 .when("/setting", {
                     controller: 'settingController',
                     templateUrl: 'views/index.html'
@@ -72,6 +76,7 @@ define(['angular', 'angular-material', 'angular-animate', 'dist/pdfController.mi
             $location.path("article")
         }])
         .controller("loginController", ["$scope", "userService", "$toolkit", function ($scope, userService, $toolkit) {
+            $scope.NavTrace.unshift("登录", "#/login");
             $scope.login = new userService.User();
             $scope.reg = new userService.User({gender: '1'});
             $scope.Login = function (user) {

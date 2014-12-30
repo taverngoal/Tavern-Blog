@@ -25,56 +25,7 @@
 <body style="display: none">
 <md-progress-linear ng-show="Config.Loading>0" md-mode="indeterminate" id="processbar"
                     style="position: absolute; top:0; margin:0"></md-progress-linear>
-<div id="login" layout="row" layout-align="center center" style="height: 100%;" ng-show="login_"
-     ng-controller="loginController">
-    <md-content style="width:350px; background: #eee;height: 300px; border-radius: 5px; overflow: hidden" layout="row"
-                class="md-whiteframe-z4">
-        <md-tabs style="background: #fafafa">
-            <md-tab>
-                <md-tab-label>
-                    <h3><i class="fa fa-user"></i></h3>
-                </md-tab-label>
-                <div layout="row">
-                    <md-content class="panel2" flex style="padding:0 10px;">
-                        <form name="login_form" layout="column" layout-align="space-between" style="height: 230px;">
-                            <md-text-float label="账号" class="line" ng-model="login.username"
-                                           required></md-text-float>
-                            <md-text-float label="密码" class="line" ng-model="login.password" required
-                                           type="password"></md-text-float>
-                            <md-checkbox style="text-align: center">记住我</md-checkbox>
-                            <md-button ng-disabled="login_form.$invalid" class="md-primary md-raised"
-                                       ng-click="Login(login)" id="login_button"
-                                       style="width: 100%">登录
-                            </md-button>
-                        </form>
-                    </md-content>
-                </div>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    <h3><i class="fa fa-key"></i></h3>
-                </md-tab-label>
-                <div layout="row">
-                    <md-content class="panel2" flex style="padding:0 10px">
-                        <form name="reg_form" layout="column" layout-align="space-between" style="height: 230px;">
-                            <md-text-float label="账号" class="line" ng-model="reg.username" required></md-text-float>
-                            <md-text-float label="密码" class="line" type="password"
-                                           ng-model="reg.password" required></md-text-float>
-                            <md-radio-group ng-model="reg.gender" required style="text-align: center">
-                                <md-radio-button value="1">男</md-radio-button>
-                                <md-radio-button value="2">女</md-radio-button>
-                            </md-radio-group>
-                            <md-button ng-disabled="reg_form.$invalid" class="md-primary md-raised" id="reg_button"
-                                       style="width: 100%" ng-click="Reg(reg)">注册
-                            </md-button>
-                        </form>
-                    </md-content>
-                </div>
-            </md-tab>
-        </md-tabs>
 
-    </md-content>
-</div>
 <md-content layout="row" id="content" style="height: 100%;">
     <md-content flex class="panel-content" layout="column">
         <div class="nav-pills">
@@ -93,7 +44,7 @@
     <md-content flex="15" class="panel-side md-whiteframe-z5" layout="column" hide-md hide-sm>
         <h1 layout-align="center center" style="text-align: center">
             <md-button class="md-button md-default-theme" ng-click="$mdSidenav('left').toggle()" style="color:#fff"><i
-                    class="fa fa-bars"></i>Etrain
+                    class="fa fa-bars"></i>Tavern
             </md-button>
         </h1>
         <ul>
@@ -105,6 +56,9 @@
             </li>
         </ul>
         <div id="settingbar">
+            <md-button aria-label="accessibility" class="md-button md-default-theme" style="color:#fff"
+                       ng-href="#/login"><i
+                    class="fa fa-user"></i></md-button>
             <md-button aria-label="accessibility" class="md-button md-default-theme" style="color:#fff"
                        ng-href="#/setting"><i
                     class="fa fa-cog"></i></md-button>

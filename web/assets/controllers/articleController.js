@@ -30,12 +30,16 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
             .controller("articleIndex", ["$scope", "$mdDialog", "articleService", "$toolkit", "$routeParams", "$location",
                 function ($scope, $mdDialog, articleService, $toolkit, $routeParams, $location) {
                     $scope.tag = $routeParams.tag;
+                    //列表展现形式
+                    localStorage['article_show_type'] = $scope.article_show_type = localStorage['article_show_type'] || "line";
+
+                    $scope.changeArticleShowType = function (type) {
+                        localStorage['article_show_type'] = $scope.article_show_type = type;
+                    };
 
                     if ($scope.tag)
                         $scope.NavTrace.unshift($scope.tag, "#/article/" + $scope.tag + "/index");
                     $scope.NavTrace.unshift("列表", "#/article");
-
-
 
                     //获取mark
                     $scope.tags = $toolkit.Tag.query(function (content) {

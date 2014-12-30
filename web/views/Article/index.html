@@ -2,11 +2,14 @@
 
     <div class="actionbar" layout="row" layout-align="space-between end" style="line-height: 28px">
         <div flex>
-            <md-button aria-label="accessibility" ng-href="#/article/new"><i class="fa fa-plus" style="color:#00897b"></i>
+            <md-button aria-label="accessibility" ng-href="#/article/new"><i class="fa fa-plus"
+                                                                             style="color:#00897b"></i>
             </md-button>
-            <md-button aria-label="accessibility" ng-href="#/article/new"><i class="fa fa-list" style="color:#00897b"></i>
+            <md-button aria-label="accessibility" ng-click="changeArticleShowType('line')"><i class="fa fa-list"
+                                                                                              style="color:#00897b"></i>
             </md-button>
-            <md-button aria-label="accessibility" ng-href="#/article/new"><i class="fa fa-th-large" style="color:#00897b"></i>
+            <md-button aria-label="accessibility" ng-click="changeArticleShowType('grid')"><i class="fa fa-th-large"
+                                                                                              style="color:#00897b"></i>
             </md-button>
         </div>
 
@@ -19,7 +22,7 @@
             </ui-select-choices>
         </ui-select>
     </div>
-    <ul class="articles">
+    <ul class="articles" ng-class="{line: article_show_type=='line', grid: article_show_type=='grid'}">
         <li ng-repeat="a in articles">
             <header>
                 <span class="datetime">

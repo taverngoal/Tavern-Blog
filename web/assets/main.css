@@ -42,7 +42,9 @@ li > a, a.inherit, .inherit a
 #article_index {}
     #article_index > ul.articles{margin: 0; padding: 0; list-style: none;}
         #article_index > ul.articles > li{ display: block; margin:1% 1%; float: left; background: #fff; box-shadow: 0 0 5px #aaa; width:48%;
-            padding: 0 15px 0 15px; text-overflow: ellipsis;  overflow: hidden;}
+            padding: 0 15px 0 15px; text-overflow: ellipsis;  overflow: hidden; transition: width 1s; }
+        #article_index > ul.articles.line > li { width: 97%; }
+        #article_index > ul.articles.grid > li { width: 48% }
             #article_index > ul.articles > li header { height: 55px; line-height: 55px; font-size: 24px; white-space: nowrap; text-overflow: ellipsis;  overflow: hidden; box-shadow: 0 1px #eee   }
             #article_index > ul.articles > li header .datetime:before { font-family: "FontAwesome";content:"\f017"; font-size: 24px;  }
                 #article_index > ul.articles > li header .datetime { font-size: 24px; height: 35px; line-height: 35px;color:#006699  }
@@ -52,7 +54,7 @@ li > a, a.inherit, .inherit a
                     #article_index > ul.articles > li header .day { display: block; font-size:8px;height: 10px;; line-height: 10px }
                 #article_index > ul.articles > li header a:hover{ color:#006699  }
             #article_index > ul.articles > li article { height:300px;  overflow: hidden; line-height: 1.8em;  font-size: 16px; font-family: Arial, Sans-Serif, serif;   }
-            #article_index > ul.articles > li footer { height: 30px; margin-top: 10px;  line-height: 30px;  padding: 0 5px; }
+            #article_index > ul.articles > li footer { height: 30px;line-height: 30px;  padding: 0 5px; }
                 #article_index > ul.articles > li footer .tags { display: inline-block; }
                     #article_index > ul.articles > li footer .info { display: inline-block; float: right }
                     #article_index > ul.articles > li footer .tags span{ display: inline-block; margin-right:5px; }
