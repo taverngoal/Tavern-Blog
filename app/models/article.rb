@@ -3,11 +3,6 @@ class Article < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :comments
 
-  after_find do |article|
-    article.views+=1
-    article.save!
-  end
-
   def safe_attributes
     self.as_json(only: [:id, :title, :content, :views, :user, :created_at, :updated_at],
                  include: {user: {only: [:id, :name, :username]}, tags: {only: :title}})

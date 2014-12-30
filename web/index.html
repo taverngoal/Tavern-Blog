@@ -38,10 +38,17 @@
                 <li ng-click="GlobalFun.Logout()"><i class="fa fa-sign-out fa-fw fa-lg"></i></li>
             </ul>
         </div>
-        <div class="ngview animated" ng-view></div>
+        <div class="ngview animated" ng-view>
+
+        </div>
+        <div id="copyright">
+            Powered by Tavern @ 2014 <a class="inherit pointer" target="_blank" href="https://github.com/taverngoal/Tavern-Blog"><i
+                class="fa fa-fw fa-github fa-lg"></i></a>
+        </div>
     </md-content>
 
-    <md-content flex="15" class="panel-side md-whiteframe-z5" layout="column" hide-md hide-sm>
+    <md-content flex="15" class="panel-side md-whiteframe-z5" layout="column" hide-md hide-sm
+                ng-hide="Config.Module=='Login'">
         <h1 layout-align="center center" style="text-align: center">
             <md-button class="md-button md-default-theme" ng-click="$mdSidenav('left').toggle()" style="color:#fff"><i
                     class="fa fa-bars"></i>Tavern
@@ -50,9 +57,6 @@
         <ul>
             <li ng-class="{active:Config.Module=='Article'}">
                 <a href="#/article">文章</a>
-            </li>
-            <li ng-class="{active:Config.Module=='PDF'}">
-                <a href="#/pdf">PDF文档</a>
             </li>
         </ul>
         <div id="settingbar">

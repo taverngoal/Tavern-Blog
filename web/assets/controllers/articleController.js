@@ -80,6 +80,8 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
             .controller("articleNew", ["$scope", "articleService", "$toolkit", "$location", "$interval"
                 , function ($scope, articleService, $toolkit, $location, $interval) {
                     $scope.NavTrace.unshift("新建", "#/article/new");
+                    $toolkit.Authorize(function(){
+                    });
 
                     $scope.articleReset = function () {
                         localStorage['article_new'] = angular.toJson({content: "", tags: []});
@@ -148,6 +150,7 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                 }])
             .controller("articleView", ["$scope", "articleService", "$toolkit", "$routeParams", function ($scope, articleService, $toolkit, $routeParams) {
                 $scope.id = $routeParams.id;
+
                 require(['marked', 'highlight'], function () {
                     marked.setOptions({
                         highlight: function (code) {
@@ -162,6 +165,7 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
 
                     $scope.marked = marked;
                 });
+                $toolkit.markdownEditor("editor", function () {});
 
 
                 $scope.DateParse = $toolkit.DateParse;

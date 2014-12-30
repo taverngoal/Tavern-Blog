@@ -75,28 +75,31 @@ define(['angular', 'angular-material', 'angular-animate', 'dist/pdfController.mi
             $scope.controller_name = "indexController";
             $location.path("article")
         }])
-        .controller("loginController", ["$scope", "userService", "$toolkit", function ($scope, userService, $toolkit) {
-            $scope.NavTrace.unshift("登录", "#/login");
-            $scope.login = new userService.User();
-            $scope.reg = new userService.User({gender: '1'});
-            $scope.Login = function (user) {
-                user.$login(function (user) {
-                    $scope.Config.User = user;
-                }, function (res) {
-                });
-            };
-            $scope.Reg = function (user) {
-                $scope.temp_password = angular.copy(user.password);
-                user.$reg(function () {
-                    $toolkit.Notice.show("注册成功，正在自动登录");
-                    user.password = $scope.temp_password;
-                    $scope.Login(user, function () {
-                        delete $scope.temp_password;
+        .controller("loginController", ["$scope", "userService", "$toolkit", "$rootScope", "$location",
+            function ($scope, userService, $toolkit, $rootScope, $location) {
+                $rootScope.Config.Module = "Login";
+                $scope.NavTrace.unshift("登录", "#/login");
+                $scope.login = new userService.User();
+                $scope.reg = new userService.User({gender: '1'});
+                $scope.Login = function (user) {
+                    user.$login(function (user) {
+                        $scope.Config.User = user;
+                        $location.path('/')
+                    }, function (res) {
                     });
-                }, function () {
-                })
-            };
-        }])
+                };
+                $scope.Reg = function (user) {
+                    $scope.temp_password = angular.copy(user.password);
+                    user.$reg(function () {
+                        $toolkit.Notice.show("注册成功，正在自动登录");
+                        user.password = $scope.temp_password;
+                        $scope.Login(user, function () {
+                            delete $scope.temp_password;
+                        });
+                    }, function () {
+                    })
+                };
+            }])
         .controller("settingController", ["$scope", "userService", "$mdToast", "$location",
             function ($scope, userService, $mdToast, $location) {
                 if (!$scope.Config.User)

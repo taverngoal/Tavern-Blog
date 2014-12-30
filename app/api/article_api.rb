@@ -38,6 +38,8 @@ class Etrain::ArticleApi < Grape::API
         @article = Article.find_by(id: params[:id])
       end
       get do
+        @article.views+=1
+        @article.save!
         @article.safe_attributes
       end
 
