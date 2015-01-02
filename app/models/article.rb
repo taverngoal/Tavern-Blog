@@ -8,6 +8,13 @@ class Article < ActiveRecord::Base
                  include: {user: {only: [:id, :name, :username]}, tags: {only: :title}})
   end
 
+  def paginate_comments(start=0, _end =100)
+    length = _end - start
+    length = 100 if length>100
+    return self.comments.includes(:o_auth_account).order(created_at: :desc)
+               .offset(start).limit(length+1), self.comments.count
+  end
+
   class << self
     def paginate(start=0, _end=100)
       length = _end - start

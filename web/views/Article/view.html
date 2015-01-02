@@ -1,11 +1,11 @@
 <div id="articleview" ng-controller="articleWrap">
-    <section>
+    <section class="article">
         <header>
             <i class="fa fa-qrcode fa-fw qrcode"></i>
             <span class="title">{{article.title}}</span>
             <span class="extension"><i class="fa fa-clock-o fa-fw"></i>{{DateParse(article.created_at,"yyyy-MM-dd hh:mm:ss")}}</span>
         </header>
-        <article ng-bind-html="article.content"  style="min-height: 300px">
+        <article ng-bind-html="article.content" style="min-height: 300px">
         </article>
         <footer>
             <i class="fa fa-user fa-fw"></i> {{article.user.name||article.user.username||"匿名"}}
@@ -13,8 +13,30 @@
             <i class="fa fa-comment fa-fw"></i>0
         </footer>
     </section>
-    <!--<section>-->
-        <!--<div class="editor" ng-model="comment.content"-->
-             <!--ui-ace="{showGutter: false,mode:'markdown',theme:'chrome'}" style="height: 200px"></div>-->
-    <!--</section>-->
+    <section class="comment">
+        <h4>评论</h4>
+        <ul>
+            <li ng-repeate="comment in comments"></li>
+        </ul>
+        <p bgf-pagination collection="comments" auto-presets="false" reload-page="reload" per-page="4"
+           url="'api/articles/'+id+'/comments'"
+           template-url="assets/paginate-anything.html"></p>
+
+        <div>
+            <p class="editor_notice">
+                <span><a ng-click="CommentReview()"
+                         class="pointer">{{preview_show?'[编辑]':'[预览]'}}</a></span>
+                <span><code>Ctrl+S</code>提交，可以使用<a
+                        href="http://www.markdown.cn/"><code>Markdown</code></a>语法
+                </span>
+                <span class="pull-right" id="wb_connect_btn"></span>
+            </p>
+            <textarea ng-hide="preview_show" ng-keydown="keydown($event)" class="editor"
+                      ng-model="$parent.comment.content"></textarea>
+
+            <div class="editor" ng-show="preview_show" ng-bind-html="preview">
+
+            </div>
+        </div>
+    </section>
 </div>

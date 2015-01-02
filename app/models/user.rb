@@ -1,6 +1,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :articles, class_name: 'Article'
+  has_one :o_auth_account
   validates :username, uniqueness: {case_sensitive: false, message: '已有该用户!'},
             length: {in: 4...32, message: '用户名在4-32个字符之内'}
 
@@ -52,9 +53,10 @@ class User < ActiveRecord::Base
       if user
         result = hashcode == Digest::SHA1.hexdigest(user.encrypted_password+$config['base']['secret_key'])
         if result
-          user
+          return user
         else
-          cookies.delete $config['base']['auth_cookie_name']
+          User.logout cookies
+          return nil
         end
       end
     end

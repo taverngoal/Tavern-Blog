@@ -43,18 +43,27 @@ class Etrain::ArticleApi < Grape::API
         @article.safe_attributes
       end
 
+      desc '获取带文章的所有评论'
       namespace 'comments' do
         get do
-
+          if @article
+            paginate_anything do |start, _end|
+              @article.paginate_comments(start, _end)
+                  .as_json(includes: {only: [:o_auth_account, :id, :content, :up, :down, :created_at]})
+            end
+          else
+            status(404)
+          end
         end
 
         params do
           requires :content, type: String
-          optional :name, type: String
-          optional :email, type: String
+          requires :id, type: Integer
+          optional :account_id, type: Integer
+          optional :parent_id, type: Integer
         end
         post do
-
+          Comment.post(params[:id], params[:account_id], params[:content], params[:parent_id])
         end
       end
     end

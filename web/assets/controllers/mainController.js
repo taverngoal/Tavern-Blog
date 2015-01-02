@@ -49,7 +49,8 @@ define(['angular', 'angular-material', 'angular-animate', 'dist/pdfController.mi
             function ($scope, $mdSidenav, $location, $rootScope, $toolkit, userService) {
                 $rootScope.Config = {
                     User: null,
-                    Module: ""
+                    Module: "",
+                    OAuthUser: null
                 };
                 $rootScope.GlobalFun = {
                     Logout: function () {

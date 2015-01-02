@@ -80,7 +80,7 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
             .controller("articleNew", ["$scope", "articleService", "$toolkit", "$location", "$interval"
                 , function ($scope, articleService, $toolkit, $location, $interval) {
                     $scope.NavTrace.unshift("新建", "#/article/new");
-                    $toolkit.Authorize(function(){
+                    $toolkit.Authorize(function () {
                     });
 
                     $scope.articleReset = function () {
@@ -128,13 +128,6 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                     };
 
                     $toolkit.markdownEditor("editor", function () {
-                        $scope.notice = marked("####使用须知\n\n" +
-                        "- 左边是编辑器，右边是预览。\n\n" +
-                        "- 使用markdown语法。\n\n" +
-                        "- 语法查阅： <a href='http://wowubuntu.com/markdown/' target='_blank'>`Markdown语法说明`</a>\n\n" +
-                        "- 第一行是文章标题\n\n" +
-                        "- `Ctr + S` 保存");
-
                         $scope.Preview = function () {
                             if ($scope.article.content)
                                 $scope.preview = marked($scope.article.content);
@@ -164,9 +157,48 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                     });
 
                     $scope.marked = marked;
-                });
-                $toolkit.markdownEditor("editor", function () {});
 
+                    $scope.CommentReview = function () {
+                        $scope.preview = marked($scope.comment.content);
+                        $scope.preview_show = !$scope.preview_show;
+                    };
+                });
+
+
+                WB2.anyWhere(function (W) {
+                    W.widget.connectButton({
+                        id: "wb_connect_btn",
+                        type: "4,3",
+                        callback: {
+                            login: function (o) {	//登录后的回调函数
+                                $scope.Config.OAuthUser = o;
+                                $scope.$$phase || $scope.$apply()
+                            },
+                            logout: function () {	//退出后的回调函数
+                                $scope.Config.OAuthUser = null;
+                                $scope.$$phase || $scope.$apply()
+                            }
+                        }
+                    });
+                });
+
+                $scope.keydown = function (e) {
+                    if (e.ctrlKey && e.keyCode == 83) {
+                        $toolkit.Confirm.show("保存", "本评论即将保存，是否继续？", "保存", "取消"
+                            , function () {
+
+                            }, function () {
+
+                            }, e);
+                    }
+                };
+
+                //ctrl+s 保存
+                $(document).keydown(function (e) {
+                    if (e.ctrlKey && e.keyCode == 83) {
+                        e.preventDefault();
+                    }
+                });
 
                 $scope.DateParse = $toolkit.DateParse;
             }])

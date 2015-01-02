@@ -76,7 +76,7 @@ li > a, a.inherit, .inherit a
 
 
 
-#articleview section {  background: #fff; padding:0 20px 20px 20px; box-shadow: 0 0 5px #aaa; overflow: hidden; margin-bottom: 20px }
+#articleview section {  background: #fff; padding:0 20px 10px 20px; box-shadow: 0 0 5px #aaa; overflow: hidden; margin-bottom: 20px }
     #articleview section header{ height: 60px; line-height: 60px; box-shadow: 0 1px #eee; font-size: 24px; color:#006699;  white-space: nowrap; text-overflow: ellipsis;  overflow: hidden; }
         #articleview section header .qrcode{  line-height: 60px; }
         #articleview section header .title{  display: inline-block; max-width: 70%; }
@@ -84,6 +84,9 @@ li > a, a.inherit, .inherit a
     #articleview section article{ font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace; padding: 0 20px; overflow: hidden  }
         #articleview section article pre{ overflow-x: auto}
     #articleview section footer { text-align: right }
+#articleview .comment { padding:10px 20px; }
+    #articleview .editor_notice { padding: 0 10px;border-radius: 5px; }
+    #articleview .comment .editor { overflow: auto; width: 100%; padding: 5px; background: #f8f8f8; border:none; box-shadow: 0 0 5px #aaa inset ; border-radius: 2px; min-height:200px}
 
 .actionbar { padding: 0 20px; margin:0; }
     .actionbar .md-button{ padding: 0 5px; color:#aaa;  line-height: 28px;}

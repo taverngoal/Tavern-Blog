@@ -5,12 +5,10 @@ class CreateComments < ActiveRecord::Migration
       t.integer :up, default: 0, null: false
       t.integer :down, default: 0, null: false
       t.boolean :enable, default: true, null: false
-      t.string :email
-      t.string :name, default: '匿名'
       t.string :ip
 
-
-      t.references :comments, index: true
+      t.references :o_auth_account, index: true, null: true
+      t.references :comment, index: true
       t.references :article, index: true
 
       t.timestamps
