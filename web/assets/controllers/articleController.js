@@ -24,7 +24,7 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                     })
             }])
             .controller("articleWrap", ["$scope", "$rootScope", "$mdDialog", function ($scope, $rootScope, $mdDialog) {
-                $scope.NavTrace.unshift("文章", "#/article");
+                $scope.NavTrace.unshift("博客", "#/article");
                 $rootScope.Config.Module = "Article";
             }])
             .controller("articleIndex", ["$scope", "$mdDialog", "articleService", "$toolkit", "$routeParams", "$location",

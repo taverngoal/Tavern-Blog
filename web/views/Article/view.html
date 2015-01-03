@@ -32,7 +32,7 @@
                 <span class="pull-right" id="wb_connect_btn"></span>
             </p>
             <textarea ng-hide="preview_show" ng-keydown="keydown($event)" class="editor"
-                      ng-model="$parent.comment.content"></textarea>
+                      ng-model="$parent.comment.content" ng-init="$parent.comment.content=''"></textarea>
 
             <div class="editor" ng-show="preview_show" ng-bind-html="preview">
 
