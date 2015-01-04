@@ -80,7 +80,7 @@ li > a, a.inherit, .inherit a
     #articleview section header{ height: 60px; line-height: 60px; box-shadow: 0 1px #eee; font-size: 24px; color:#006699;  white-space: nowrap; text-overflow: ellipsis;  overflow: hidden; }
         #articleview section header .qrcode{  line-height: 60px; }
         #articleview section header .title{  display: inline-block; max-width: 70%; }
-        #articleview section header .extension { float: right; line-height: 60px; font-size: 16px; color:#aaa; text-shadow:0 0 2px #eee; }
+        #articleview section header .extension { float: right; line-height: 60px; font-size: 14px; color:#aaa; text-shadow:0 0 2px #eee; }
     #articleview section article{ font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace; padding: 0 20px; overflow: hidden  }
         #articleview section article pre{ overflow-x: auto}
     #articleview section footer { text-align: right }
@@ -88,7 +88,7 @@ li > a, a.inherit, .inherit a
     #articleview .comment > ul { list-style: none; margin:0 0 10px 0; padding: 0}
         #articleview .comment > ul > li{ margin-bottom: 10px; padding: 10px 10px }
             #articleview .comment > ul > li:nth-child(2n){ background: #eee}
-                #articleview .comment > ul > li .comment_info { font-size: 16px; color:#006699; }
+                #articleview .comment > ul > li .comment_info { font-size: 14px; color:#006699; }
     #articleview .editor_notice { padding: 0 10px;border-radius: 5px; }
     #articleview .comment .editor { overflow: auto; width: 100%; padding: 5px; background: #f8f8f8; border:none; box-shadow: 0 0 5px #aaa inset ; border-radius: 2px; min-height:200px}
 
