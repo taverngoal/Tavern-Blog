@@ -26,7 +26,7 @@
     <script src="http://cdn.bootcss.com/require.js/2.1.15/require.min.js" data-main="assets/config.js"></script>
 
 </head>
-<body style="display: none">
+<body >
 <md-progress-linear ng-show="Config.Loading>0" md-mode="indeterminate" id="processbar"
                     style="position: absolute; top:0; margin:0"></md-progress-linear>
 
@@ -35,10 +35,10 @@
         <div class="nav-pills">
             <ul>
                 <li><a href="#/"><i class="fa fa-home fa-lg"></i></a></li>
-                <li ng-repeat="nav in NavTrace._traces"><a ng-href="{{nav.url}}">{{nav.title}}</a></li>
+                <li ng-repeat="nav in NavTrace._traces"><a ng-href="{{nav.url}}" ng-bind="nav.title"></a></li>
             </ul>
             <ul ng-show="Config.User.id">
-                <li><i class="fa fa-user fa-fw fa-lg"></i>{{Config.User.username}}</li>
+                <li><i class="fa fa-user fa-fw fa-lg"></i><span ng-bind="Config.User.username"></span></li>
                 <li ng-click="GlobalFun.Logout()"><i class="fa fa-sign-out fa-fw fa-lg"></i></li>
             </ul>
         </div>
@@ -55,7 +55,7 @@
     <md-content flex="15" class="panel-side md-whiteframe-z5" layout="column" hide-md hide-sm
                 ng-hide="Config.Module=='Login'">
         <h1 layout-align="center center" style="text-align: center">
-            <md-button class="md-button md-default-theme" ng-click="$mdSidenav('left').toggle()" style="color:#fff"><i
+            <md-button class="md-button md-default-theme" style="color:#fff"><i
                     class="fa fa-bars"></i>Tavern
             </md-button>
         </h1>
@@ -73,16 +73,6 @@
                     class="fa fa-cog"></i></md-button>
         </div>
     </md-content>
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-        <md-toolbar class="md-theme-light">
-            <h1 class="md-toolbar-tools">导航</h1>
-        </md-toolbar>
-        <md-content class="md-padding">
-            <md-button ng-href="#/pdf" class="md-primary line-button">
-                <i class="fa fa-lemon-o"></i> PDF
-            </md-button>
-        </md-content>
-    </md-sidenav>
 </md-content>
 </body>
 </html>

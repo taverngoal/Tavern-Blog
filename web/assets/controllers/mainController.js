@@ -1,9 +1,9 @@
-define(['angular', 'angular-material', 'angular-animate', 'dist/pdfController.min', 'dist/articleController.min', 'angular-route',
+define(['angular', 'angular-material', 'angular-animate', 'dist/articleController.min', 'angular-route',
     'dist/articleService.min', 'dist/toolkitService.min', 'dist/userService.min'], function (ng) {
 
     return ng.module("Etrain", [
         'ngMaterial', 'Etrain.Service.User', 'ngAnimate', 'Etrain.Article', 'ngRoute',
-        'Etrain.Service.Toolkit', 'Etrain.Service.Article', "Etrain.PDF"
+        'Etrain.Service.Toolkit', 'Etrain.Service.Article'
     ])
         .config(['$routeProvider', "$httpProvider", function ($routeProvider, $httpProvider) {
             $routeProvider
