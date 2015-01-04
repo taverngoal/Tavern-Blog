@@ -8,14 +8,14 @@ class Etrain::ArticleApi < Grape::API
 
     desc '获取文章列表'
     get do
-      paginate_anything do |start, _end|
+      articles= paginate_anything do |start, _end|
         if params[:tagname]
           Article.pagenate_for_tag(params[:tagname], start, _end)
-              .as_json(include: {tags: {only: :title}, user: {only: [:id, :username, :name]}})
         else
-          Article.paginate(start, _end).as_json(include: {tags: {only: :title}, user: {only: [:id, :username, :name]}})
+          Article.paginate(start, _end)
         end
       end
+      articles.as_json(include: {tags: {only: :title}, user: {only: [:id, :username, :name]}})
     end
 
     desc '添加文章'
@@ -38,6 +38,7 @@ class Etrain::ArticleApi < Grape::API
         @article = Article.find_by(id: params[:id])
       end
       get do
+        return status(404) unless @article
         @article.views+=1
         @article.save!
         @article.safe_attributes
@@ -45,11 +46,17 @@ class Etrain::ArticleApi < Grape::API
 
       desc '获取带文章的所有评论'
       namespace 'comments' do
+
+        helpers ::ToolKit
+        after_validation do
+          @article = Article.find_by(id: params[:id])
+        end
         get do
           if @article
             paginate_anything do |start, _end|
               @article.paginate_comments(start, _end)
-                  .as_json(includes: {only: [:o_auth_account, :id, :content, :up, :down, :created_at]})
+                  .as_json(only: [:o_auth_account_id, :id, :content, :up, :down, :created_at],
+                           include: {o_auth_account: {only: [:id, :avatar_large, :screen_name]}})
             end
           else
             status(404)
@@ -58,12 +65,14 @@ class Etrain::ArticleApi < Grape::API
 
         params do
           requires :content, type: String
-          requires :id, type: Integer
-          optional :account_id, type: Integer
+          optional :account, type: Hash do
+            optional :id, type: String
+            optional :screen_name, type: String
+          end
           optional :parent_id, type: Integer
         end
         post do
-          Comment.post(params[:id], params[:account_id], params[:content], params[:parent_id])
+          Comment.post(@article, params[:content], params[:parent_id], params[:account])
         end
       end
     end

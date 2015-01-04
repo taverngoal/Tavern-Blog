@@ -7,7 +7,10 @@ define(["angular", "angular-resource"], function (angular) {
         .service("articleService", ["$resource", "$rootScope", function ($resource, $rootScope) {
             var url = "api/articles/:id";
             var $this = this;
-            this.Article = $resource(url, {id: "@id"}, {});
+            this.Article = $resource(url, {id: "@id"}, {
+                commentPost: {method: "post", url: "api/articles/:id/comments"},
+                comments: {method: "get", url: "api/articles/:id/comments", isArray: true}
+            });
         }])
 
         ;

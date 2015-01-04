@@ -4,14 +4,14 @@ class Article < ActiveRecord::Base
   has_many :comments
 
   def safe_attributes
-    self.as_json(only: [:id, :title, :content, :views, :user, :created_at, :updated_at],
+    self.as_json(only: [:id, :title, :content, :views, :user, :created_at, :updated_at, :comment_count],
                  include: {user: {only: [:id, :name, :username]}, tags: {only: :title}})
   end
 
   def paginate_comments(start=0, _end =100)
     length = _end - start
     length = 100 if length>100
-    return self.comments.includes(:o_auth_account).order(created_at: :desc)
+    return self.comments.order(created_at: :desc)
                .offset(start).limit(length+1), self.comments.count
   end
 
@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
     def paginate(start=0, _end=100)
       length = _end - start
       length = 100 if length>100
-      return Article.includes(:user, :tags).select(:id, :title, :content, :views, :user_id, :created_at, :updated_at)
+      return Article.includes(:user, :tags).select(:id, :title, :content, :views, :user_id, :created_at, :comment_count, :updated_at)
                  .order(created_at: :desc).offset(start).limit(length+1), Article.count
     end
 

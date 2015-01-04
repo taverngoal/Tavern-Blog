@@ -72,7 +72,7 @@ define(["angular", "angular-material", "angular-resource"], function (angular) {
                     show: function (title, content, okLabel) {
                         $mdDialog.show(
                             $mdDialog.alert().title(title).content(content)
-                                .ok(okLabel)
+                                .ok(okLabel || "确定")
                             //.targetEvent(ev)
                         );
                     }

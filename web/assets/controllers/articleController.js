@@ -172,11 +172,11 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                         callback: {
                             login: function (o) {	//登录后的回调函数
                                 $scope.Config.OAuthUser = o;
-                                $scope.$$phase || $scope.$apply()
+                                $scope.$$phase || $scope.$apply();
                             },
                             logout: function () {	//退出后的回调函数
                                 $scope.Config.OAuthUser = null;
-                                $scope.$$phase || $scope.$apply()
+                                $scope.$$phase || $scope.$apply();
                             }
                         }
                     });
@@ -186,7 +186,15 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
                     if (e.ctrlKey && e.keyCode == 83) {
                         $toolkit.Confirm.show("保存", "本评论即将保存，是否继续？", "保存", "取消"
                             , function () {
-
+                                articleService.Article.commentPost({
+                                    id: $scope.article.id,
+                                    content: $scope.comment.content,
+                                    account: $scope.Config.OAuthUser
+                                }, function () {
+                                    $scope.comment_reload = true;
+                                    $scope.comment = {content: ''};
+                                    $toolkit.Notice.show("评论成功！")
+                                });
                             }, function () {
 
                             }, e);

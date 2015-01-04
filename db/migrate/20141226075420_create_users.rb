@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :gender, default: 0
       t.boolean :enable, default: true, null: false
 
+      t.references :o_auth_account, index: true, null: true
       t.timestamps
     end
   end
