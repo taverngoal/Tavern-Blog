@@ -88,46 +88,12 @@ define(["angular", "angular-material", "angular-resource"], function (angular) {
                 };
                 //异常处理
                 this.exceptionHandler = {
-                    $types: {
-                        BaseError: "出错，请联系管理员",
-                        /**
-                         * @return {string}
-                         */
-                        ValidationError: function (err) {
-                            var message = "";
-                            angular.forEach(err.errors, function (item) {
-                                message += item.message + " ";
-                            });
-                            return message;
-                        },
-                        DatabaseError: "数据库出错",
-                        TimeoutError: "查询超时",
-                        UniqueConstraintError: "数据库已经有该值",
-                        ForeignKeyConstraintError: "外键",
-                        ConnectionError: "连接出错",
-                        ConnectionRefusedError: "访问被拒绝",
-                        AccessDeniedError: "访问被拒绝",
-                        HostNotFoundError: "找不到数据库",
-                        HostNotReachableError: "数据库不可达",
-                        InvalidConnectionError: "",
-                        ConnectionTimedOutError: "数据库连接超时"
-                    },
-
                     Handle: function (err) {
                         err.name = err.name || "";
-                        var err_name = err.name.substr(9);
-                        var msg = "";
-                        if (err_name in this.$types) {
-                            if (angular.isString(this.$types[err_name]))
-                                msg = this.$types[err_name];
-                            else
-                                msg = this.$types[err_name](err);
-                        } else msg = err.message;
+                        var msg = err.message;
                         $this.Notice.show(msg);
                     }
                 }
-
-
             }
         ])
 });

@@ -1,7 +1,8 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
-  has_many :comments
+  has_many :comments, -> { where enable: true }
+  has_many :all_comments, class_name: 'Comment', foreign_key: 'comment_id', dependent: :destroy
 
   def safe_attributes
     self.as_json(only: [:id, :title, :content, :views, :user, :created_at, :updated_at, :comment_count],
@@ -16,11 +17,16 @@ class Article < ActiveRecord::Base
   end
 
   class << self
+
+    def available
+      Article.where(enable: true)
+    end
+
     def paginate(start=0, _end=100)
       length = _end - start
       length = 100 if length>100
-      return Article.includes(:user, :tags).select(:id, :title, :content, :views, :user_id, :created_at, :comment_count, :updated_at)
-                 .order(created_at: :desc).offset(start).limit(length+1), Article.count
+      return Article.available.includes(:user, :tags).select(:id, :title, :content, :views, :user_id, :created_at, :comment_count, :updated_at)
+                 .order(created_at: :desc).offset(start).limit(length+1), Article.available.count
     end
 
     def pagenate_for_tag(tag_name='', start=0, _end=100)

@@ -1,12 +1,9 @@
 body { height: 100%; margin:0;  background: url('imgs/bgs/20.png') transparent; font-family: "Helvetica Neue", "Helvetica", Helvetica, 'Microsoft YaHei UI' , 'Microsoft YaHei', sans-serif;
     padding: 0;  color:#444; font-size: 14px; overflow: hidden  }
 #login { }
-    /*#login .panel1 {box-shadow: 5px 0 18px rgba(0,0,0,.2);}*/
-    /*#login .panel2 {box-shadow: 2px 0 18px rgba(0,0,0,.2);}*/
     #login .md-switch-thumb, md-radio-button { display: inline-block }
     #login label{ margin: 0; }
-/*#content{display: none}*/
-md-content { background: transparent!important; }
+
 .line input { width:100% }
 .line label { color:rgba(0, 0, 0, 0.4) !important;   }
 #copyright { text-align: center; position: absolute; bottom: 0; width: 100%; height: 30px; line-height: 30px; }
@@ -75,7 +72,9 @@ li > a, a.inherit, .inherit a
         #article_new .editor_preview .preview{background: #eee;height: 500px; overflow:auto;border-radius: 0 5px 5px 0;padding: 5px;font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;}
 
 
-
+#articleview .actionbar .edit { color:green }
+#articleview .actionbar .disable { color:darkorange }
+#articleview .actionbar .delete { color:firebrick }
 #articleview section {  background: #fff; padding:0 20px 10px 20px; box-shadow: 0 0 5px #aaa; overflow: hidden; margin-bottom: 20px }
     #articleview section.article {margin-top:10px}
     #articleview section header{ height: 60px; line-height: 60px; box-shadow: 0 1px #eee; font-size: 24px; color:#006699;  white-space: nowrap; text-overflow: ellipsis;  overflow: hidden; }
@@ -133,3 +132,4 @@ md-card{ background: #fff}
 
 md-sidenav { background: #eee}
 md-toolbar.md-default-theme { background: url('imgs/bgs/4.png')}
+md-content { background: transparent!important; }

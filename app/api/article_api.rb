@@ -44,13 +44,15 @@ class Etrain::ArticleApi < Grape::API
         @article.safe_attributes
       end
 
+      desc '禁用某文章'
+      delete do
+        require_authorized!
+        @article.enable = false
+        @article.save!
+      end
+
       desc '获取带文章的所有评论'
       namespace 'comments' do
-
-        helpers ::ToolKit
-        after_validation do
-          @article = Article.find_by(id: params[:id])
-        end
         get do
           if @article
             paginate_anything do |start, _end|
@@ -73,6 +75,25 @@ class Etrain::ArticleApi < Grape::API
         end
         post do
           Comment.post(@article, params[:content], params[:parent_id], params[:account])
+        end
+
+        params do
+          requires :comment_id, type: Integer
+        end
+        namespace ':comment_id' do
+          after_validation do
+            @comment = Comment.find_by(id: params[:comment_id], enable: true)
+          end
+          delete do
+            require_authorized!
+            @comment.destroy!
+          end
+
+          put do
+            require_authorized!
+            @comment.enable = false
+            @comment.save!
+          end
         end
       end
     end

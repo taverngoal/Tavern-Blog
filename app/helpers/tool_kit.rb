@@ -8,4 +8,8 @@ module ToolKit
     header 'Content-Range', "#{start}-#{start.to_i+data.count-1}/#{count}"
     data
   end
+
+  def require_authorized!
+    error!({message: '请先登录后再试！'}.as_json, 403) unless @current_user
+  end
 end

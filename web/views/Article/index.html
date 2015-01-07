@@ -16,8 +16,8 @@
                    reset-search-input="true"
                    style="width: 400px; height: 28px;">
             <ui-select-match placeholder="标签" style="height: 28px">{{$select.selected.title}}</ui-select-match>
-            <ui-select-choices repeat="tag in tags | filter: $select.search" ng-bind="tag.title">
-
+            <ui-select-choices repeat="tag in tags | filter: $select.search">
+                {{tag.title}}
             </ui-select-choices>
         </ui-select>
     </div>

@@ -141,75 +141,98 @@ define(['angular', 'angular-route', 'angular-sanitize', 'angular-paginate-anythi
 
                     $scope.countries = [];
                 }])
-            .controller("articleView", ["$scope", "articleService", "$toolkit", "$routeParams", function ($scope, articleService, $toolkit, $routeParams) {
-                $scope.id = $routeParams.id;
+            .controller("articleView", ["$scope", "articleService", "$toolkit", "$routeParams", "$location",
+                function ($scope, articleService, $toolkit, $routeParams, $location) {
+                    $scope.id = $routeParams.id;
 
-                require(['marked', 'highlight'], function () {
-                    marked.setOptions({
-                        highlight: function (code) {
-                            return hljs.highlightAuto(code).value;
-                        }
-                    });
-
-                    $scope.article = articleService.Article.get({id: $scope.id}, function (content) {
-                        $scope.NavTrace.push(content.title, "#/article/" + $scope.id + "/view");
-                        content.content = marked(content.content)
-                    });
-
-                    $scope.marked = marked;
-
-                    $scope.CommentReview = function () {
-                        $scope.preview = marked($scope.comment.content);
-                        $scope.preview_show = !$scope.preview_show;
-                    };
-                });
-
-
-                WB2.anyWhere(function (W) {
-                    W.widget.connectButton({
-                        id: "wb_connect_btn",
-                        type: "4,3",
-                        callback: {
-                            login: function (o) {	//登录后的回调函数
-                                $scope.Config.OAuthUser = o;
-                                $scope.$$phase || $scope.$apply();
-                            },
-                            logout: function () {	//退出后的回调函数
-                                $scope.Config.OAuthUser = null;
-                                $scope.$$phase || $scope.$apply();
+                    require(['marked', 'highlight'], function () {
+                        marked.setOptions({
+                            highlight: function (code) {
+                                return hljs.highlightAuto(code).value;
                             }
-                        }
-                    });
-                });
+                        });
 
-                $scope.keydown = function (e) {
-                    if (e.ctrlKey && e.keyCode == 83) {
-                        $toolkit.Confirm.show("保存", "本评论即将保存，是否继续？", "保存", "取消"
-                            , function () {
-                                articleService.Article.commentPost({
-                                    id: $scope.article.id,
-                                    content: $scope.comment.content,
-                                    account: $scope.Config.OAuthUser
+                        $scope.article = articleService.Article.get({id: $scope.id}, function (content) {
+                            $scope.NavTrace.push(content.title, "#/article/" + $scope.id + "/view");
+                            content.content = marked(content.content)
+                        });
+
+                        $scope.marked = marked;
+
+                        $scope.CommentReview = function () {
+                            $scope.preview = marked($scope.comment.content);
+                            $scope.preview_show = !$scope.preview_show;
+                        };
+                    });
+
+                    $scope.keydown = function (e) {
+                        if (e.ctrlKey && e.keyCode == 83) {
+                            $toolkit.Confirm.show("保存", "本评论即将保存，是否继续？", "保存", "取消"
+                                , function () {
+                                    articleService.Article.commentPost({
+                                        id: $scope.article.id,
+                                        content: $scope.comment.content,
+                                        account: $scope.Config.OAuthUser
+                                    }, function () {
+                                        $scope.comment_reload = true;
+                                        $scope.comment = {content: ''};
+                                        $toolkit.Notice.show("评论成功！")
+                                    });
                                 }, function () {
-                                    $scope.comment_reload = true;
-                                    $scope.comment = {content: ''};
-                                    $toolkit.Notice.show("评论成功！")
-                                });
+
+                                }, e);
+                        }
+                    };
+
+                    $scope.disable = function () {
+                        $toolkit.Confirm.show("确认", "真的要禁用本文？", "是", "否"
+                            , function () {
+                                $scope.article.$delete(function () {
+                                    $toolkit.Notice.show("已禁用")
+                                    $location.path("article")
+                                })
                             }, function () {
 
-                            }, e);
+                            }, event);
+                    };
+
+                    $scope.comment_disable = function () {
+
+                    };
+
+                    $scope.comment_delete = function () {
+
+                    };
+
+                    //ctrl+s 保存
+                    $(document).keydown(function (e) {
+                        if (e.ctrlKey && e.keyCode == 83) {
+                            e.preventDefault();
+                        }
+                    });
+
+                    $scope.DateParse = $toolkit.DateParse;
+                }])
+            .directive("weiboLoginButton", function () {
+                return {
+                    link: function (scope, ele, attrs) {
+                        WB2.anyWhere(function (W) {
+                            W.widget.connectButton({
+                                id: attrs['id'],//"wb_connect_btn",
+                                type: "4,3",
+                                callback: {
+                                    login: function (o) {	//登录后的回调函数
+                                        $scope.Config.OAuthUser = o;
+                                        $scope.$$phase || $scope.$apply();
+                                    },
+                                    logout: function () {	//退出后的回调函数
+                                        $scope.Config.OAuthUser = null;
+                                        $scope.$$phase || $scope.$apply();
+                                    }
+                                }
+                            });
+                        });
                     }
-                };
-
-                //ctrl+s 保存
-                $(document).keydown(function (e) {
-                    if (e.ctrlKey && e.keyCode == 83) {
-                        e.preventDefault();
-                    }
-                });
-
-                $scope.DateParse = $toolkit.DateParse;
-            }])
-
-            ;
+                }
+            })
     });

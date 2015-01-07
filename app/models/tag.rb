@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :articles
+  has_and_belongs_to_many :articles, -> { where enable: true }
 
   class << self
     def add_mul_increment(tags=[])
