@@ -10,7 +10,7 @@ class Etrain::ArticleApi < Grape::API
     get do
       articles= paginate_anything do |start, _end|
         if params[:tagname]
-          Article.pagenate_for_tag(params[:tagname], start, _end)
+          Article.paginate_for_tag(params[:tagname], start, _end)
         else
           Article.paginate(start, _end)
         end
