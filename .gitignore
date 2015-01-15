@@ -4,7 +4,6 @@ web/assets/dist
 node_modules/
 db/development.sqlite3
 db/schema.rb
-Gemfile.lock
 
 
 *.gem
