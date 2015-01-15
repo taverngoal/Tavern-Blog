@@ -11,7 +11,6 @@ gem 'rack-contrib', git: 'https://github.com/sebglazebrook/rack-contrib.git'
 gem 'goliath', :require => false
 
 group :production do
-  gem 'sqlite3'
   gem 'pg'
 end
 
