@@ -11,7 +11,7 @@ gem 'rack-contrib', git: 'https://github.com/sebglazebrook/rack-contrib.git'
 gem 'goliath', :require => false
 
 group :production do
-  gem 'pg'
+  #gem 'mysql2'
 end
 
 group :development, :test do

@@ -53,7 +53,12 @@ class Etrain::ArticleApi < Grape::API
 
       desc '获取带文章的所有评论'
       namespace 'comments' do
+        helpers ::ToolKit
+        after_validation do
+          @article = Article.find_by(id: params[:id])
+        end
         get do
+          p @article
           if @article
             paginate_anything do |start, _end|
               @article.paginate_comments(start, _end)
@@ -74,7 +79,7 @@ class Etrain::ArticleApi < Grape::API
           optional :parent_id, type: Integer
         end
         post do
-          Comment.post(@article, params[:content], params[:parent_id], params[:account])
+          Comment.post(@article, params[:content], params[:parent_id], params[:account], env['REMOTE_ADDR'])
         end
 
         params do

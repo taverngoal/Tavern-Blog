@@ -16,6 +16,8 @@ class Etrain < Grape::API
   require "#{__dir__}/tag_api"
   require "#{__dir__}/comment_api"
 
+  use Rack::Session::Cookie
+
   mount Etrain::UserApi => '/'
   mount Etrain::ArticleApi => '/'
   mount Etrain::TagApi => '/'

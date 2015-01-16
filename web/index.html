@@ -19,14 +19,12 @@
     <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1202527&debug=true" type="text/javascript"
             charset="utf-8"></script>
 
-    <!--<script src="assets/vendor/epiceditor/epiceditor/js/epiceditor.min.js"></script>-->
-    <!--<script src="http://cdn.bootcss.com/highlight.js/8.3/highlight.min.js"></script>-->
     <script src="assets/vendor/marked/lib/marked.js"></script>
     <script src="http://general.qiniudn.com/hammer/hammer.min.js"></script>
     <script src="http://cdn.bootcss.com/require.js/2.1.15/require.min.js" data-main="assets/config.js"></script>
 
 </head>
-<body >
+<body>
 <md-progress-linear ng-show="Config.Loading>0" md-mode="indeterminate" id="processbar"
                     style="position: absolute; top:0; margin:0"></md-progress-linear>
 
@@ -54,11 +52,13 @@
 
     <md-content flex="15" class="panel-side md-whiteframe-z5" layout="column" hide-md hide-sm
                 ng-hide="Config.Module=='Login'">
-        <h1 layout-align="center center" style="text-align: center">
+        <h2 layout-align="center center" style="text-align: center">
             <md-button class="md-button md-default-theme" style="color:#fff"><i
                     class="fa fa-bars"></i>Tavern
             </md-button>
-        </h1>
+            <a href="http://weibo.com/u/1733849187" target="_blank">
+                <img src="assets/imgs/tavern.jpg" style="width: 50%; " class="img-circle"></a>
+        </h2>
         <ul>
             <li ng-class="{active:Config.Module=='Article'}">
                 <a href="#/article">博客</a>
