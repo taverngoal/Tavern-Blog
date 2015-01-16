@@ -8,6 +8,7 @@ class Etrain < Grape::API
   end
 
   rescue_from :all do |e|
+    Log.do(e.message, e.backtrace.as_json.join(','), env['REMOTE_ADDR'])
     error_response status: 500, message: {message: e.message, class: e.class.name, statck: e.backtrace}.as_json
   end
 
@@ -16,7 +17,7 @@ class Etrain < Grape::API
   require "#{__dir__}/tag_api"
   require "#{__dir__}/comment_api"
 
-  use Rack::Session::Cookie
+  # use Rack::Session::Cookie
 
   mount Etrain::UserApi => '/'
   mount Etrain::ArticleApi => '/'
