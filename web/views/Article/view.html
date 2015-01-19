@@ -13,7 +13,7 @@
             <span class="title">{{article.title}}</span>
             <span class="extension"><i class="fa fa-clock-o fa-fw"></i>{{DateParse(article.created_at,"yyyy-MM-dd hh:mm:ss")}}</span>
         </header>
-        <article ng-bind-html="article.content" style="min-height: 300px">
+        <article ng-bind-html="article.content" style="min-height: 300px">楼
         </article>
         <footer>
             <span class="pull-left"> <i class="fa fa-paragraph pointer"></i></span>
@@ -60,7 +60,7 @@
                 <span><a ng-click="CommentReview()"
                          class="pointer">{{preview_show?'[编辑]':'[预览]'}}</a></span>
                 <span><code>Ctrl+S</code>提交，可以使用<a
-                        href="http://www.markdown.cn/"><code>Markdown</code></a>语法
+                        href="http://www.markdown.cn/" target="_blank"><code>Markdown</code></a>语法
                 </span>
                 <span class="pull-right" id="wb_connect_btn" weibo-login-button></span>
             </p>

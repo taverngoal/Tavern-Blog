@@ -23,7 +23,7 @@ class Etrain::ArticleApi < Grape::API
       requires :title, type: String
       requires :tags, type: Array
       requires :content, type: String
-    end
+    end                           
     post do
       error!({message: '请先登录后再试！'}.as_json, 403) unless @current_user
 
