@@ -28,5 +28,5 @@ production:
   host: <%= ENV['TAVERN_BLOG_HOST']>
   username: <%= ENV['TAVERN_BLOG_USER']>
   password: <%= ENV['TAVERN_BLOG_PASSWORD']>
-  encoding: uft8
+  encoding: utf8
   pool: 5
