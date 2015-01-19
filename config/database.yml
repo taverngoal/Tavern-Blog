@@ -24,9 +24,9 @@ production:
 #  <<: *default
 #  database: db/production.sqlite3
   adapter: mysql2
-  database: <%= ENV['TAVERN_BLOG_DATABASE']>
-  host: <%= ENV['TAVERN_BLOG_HOST']>
-  username: <%= ENV['TAVERN_BLOG_USER']>
-  password: <%= ENV['TAVERN_BLOG_PASSWORD']>
+  database: <%= ENV['TAVERN_BLOG_DATABASE']%>
+  host: <%= ENV['TAVERN_BLOG_HOST']%>
+  username: <%= ENV['TAVERN_BLOG_USER']%>
+  password: <%= ENV['TAVERN_BLOG_PASSWORD']%>
   encoding: utf8
   pool: 5
