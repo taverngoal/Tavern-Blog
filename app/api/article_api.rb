@@ -23,7 +23,7 @@ class Etrain::ArticleApi < Grape::API
       requires :title, type: String
       requires :tags, type: Array
       requires :content, type: String
-    end                           
+    end
     post do
       error!({message: '请先登录后再试！'}.as_json, 403) unless @current_user
 
@@ -58,15 +58,12 @@ class Etrain::ArticleApi < Grape::API
           @article = Article.find_by(id: params[:id])
         end
         get do
-          p @article
-          if @article
-            paginate_anything do |start, _end|
-              @article.paginate_comments(start, _end)
-                  .as_json(only: [:o_auth_account_id, :id, :content, :up, :down, :created_at],
-                           include: {o_auth_account: {only: [:id, :avatar_large, :screen_name]}})
-            end
-          else
-            status(404)
+          error!({message: '不存在此博文！'}.as_json, 404) unless @article
+
+          paginate_anything do |start, _end|
+            @article.paginate_comments(start, _end)
+                .as_json(only: [:o_auth_account_id, :id, :content, :up, :down, :created_at],
+                         include: {o_auth_account: {only: [:id, :avatar_large, :screen_name]}})
           end
         end
 
